@@ -1,2 +1,0 @@
-# Daw 
-poca cosa
