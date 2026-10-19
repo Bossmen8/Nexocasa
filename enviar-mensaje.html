@@ -3,53 +3,51 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexocasa | Inicio</title>
     <link rel="icon" href="./img/Favicon Nexocasa.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 
 <body>
 
+    <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
     <header>
         <p>
-            <img src="./img/Logo Nexocasa.png">
+            <img src="./img/Logo Nexocasa.png" alt="">
             <a href="index.html">Nexocasa</a>
         </p>
         <nav>
             <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="busqueda.html">Buscar</a></li>
-                <li><a href="registro.html">Registrarse</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-house" aria-hidden="true"></i>Inicio</a></li>
+                <li><a href="busqueda.html"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Buscar</a></li>
+                <li><a href="registro.html"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Registrarse</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main id="contenido">
         <h1>Enviar mensaje al anunciante</h1>
         <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
 
-        <form action="respuesta-enviar-mensaje.html" method="get">
+        <form class="conBorde" action="respuesta-enviar-mensaje.html" method="get">
 
-            <p>Tipo de mensaje *</p>
-            <p>
-                <input type="radio" id="tipo-info" name="tipo-mensaje" value="mas-informacion" checked required>
-                <label for="tipo-info">Más información</label>
-            </p>
-            <p>
-                <input type="radio" id="tipo-cita" name="tipo-mensaje" value="solicitar-cita" required>
-                <label for="tipo-cita">Solicitar una cita</label>
-            </p>
-            <p>
-                <input type="radio" id="tipo-oferta" name="tipo-mensaje" value="comunicar-oferta" required>
-                <label for="tipo-oferta">Comunicar una oferta</label>
-            </p>
+            <fieldset>
+                <legend>Tipo de mensaje *</legend>
+                <label><input type="radio" name="tipo-mensaje" value="mas-informacion" checked required> Más información</label>
+                <label><input type="radio" name="tipo-mensaje" value="solicitar-cita" required> Solicitar una cita</label>
+                <label><input type="radio" name="tipo-mensaje" value="comunicar-oferta" required> Comunicar una oferta</label>
+            </fieldset>
 
-            <p>
+<p>
                 <label for="texto-mensaje">Texto *</label><br>
                 <textarea id="texto-mensaje" name="texto-mensaje" rows="6" cols="50" required></textarea>
             </p>
 
-            <p><button type="submit">Enviar mensaje</button></p>
+            <p><button type="submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Enviar mensaje</button></p>
 
         </form>
 

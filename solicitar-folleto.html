@@ -3,32 +3,32 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexocasa | Solicitar folleto publicitario</title>
     <link rel="icon" href="./img/Favicon Nexocasa.png">
-    <style>
-        table, tr, th, td {
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 
 <body>
 
+    <a class="saltar" href="#contenido">Saltar al contenido principal</a>
+
     <header>
         <p>
-            <img src="./img/Logo Nexocasa.png">
+            <img src="./img/Logo Nexocasa.png" alt="">
             <a href="index.html">Nexocasa</a>
         </p>
         <nav>
             <ul>
-                <li><a href="index-autenticado.html">Inicio</a></li>
-                <li><a href="menu-usuario.html">Mi cuenta</a></li>
+                <li><a href="index-autenticado.html"><i class="fa-solid fa-house" aria-hidden="true"></i>Inicio</a></li>
+                <li><a href="menu-usuario.html"><i class="fa-solid fa-circle-user" aria-hidden="true"></i>Mi cuenta</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main id="contenido" class="columnas">
         <h1>Solicitud de impresión de folleto publicitario</h1>
         <p>
             Mediante esta opción puedes solicitar la impresión y el envío postal de un folleto publicitario
@@ -37,8 +37,9 @@
         </p>
         <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
 
-        <h2>Tarifas</h2>
-        <table>
+        <aside>
+            <h2>Tarifas</h2>
+            <table>
             <caption>Tarifas del folleto publicitario</caption>
             <tr><th scope="col">Concepto</th><th scope="col">Tarifa</th></tr>
             <tr><th scope="row">Coste procesamiento y envío</th><td>10 €</td></tr>
@@ -50,10 +51,10 @@
             <tr><th scope="row">Resolución &lt;= 300 dpi</th><td>0 € por foto</td></tr>
             <tr><th scope="row">Resolución &gt; 300 dpi</th><td>0,2 € por foto</td></tr>
         </table>
+        </aside>
 
-        <h2>Formulario de solicitud</h2>
-
-        <form action="respuesta-solicitar-folleto.html" method="get">
+        <form class="conBorde" action="respuesta-solicitar-folleto.html" method="get">
+            <h2>Formulario de solicitud</h2>
 
             <p>
                 <label for="texto-adicional">Texto adicional</label><br>
@@ -66,7 +67,7 @@
             </p>
 
             <p>
-                <label for="email">Correo electrónico *</label><br>
+                <label for="email">&#9993; Correo electrónico *</label><br>
                 <input type="email" id="email" name="email" maxlength="200" required>
             </p>
 
@@ -126,7 +127,7 @@
             </fieldset>
 
             <p>
-                <label for="telefono">Teléfono</label><br>
+                <label for="telefono">&#9742; Teléfono</label><br>
                 <input type="tel" id="telefono" name="telefono">
             </p>
 
@@ -170,27 +171,19 @@
                 <input type="date" id="fecha-recepcion" name="fecha-recepcion">
             </p>
 
-            <p>¿Impresión a color?</p>
-            <p>
-                <input type="radio" id="color-si" name="impresion-color" value="color">
-                <label for="color-si">Color</label>
-            </p>
-            <p>
-                <input type="radio" id="color-no" name="impresion-color" value="blanco-negro">
-                <label for="color-no">Blanco y negro</label>
-            </p>
+            <fieldset>
+                <legend>¿Impresión a color?</legend>
+                <label><input type="radio" name="impresion-color" value="color"> Color</label>
+                <label><input type="radio" name="impresion-color" value="blanco-negro"> Blanco y negro</label>
+            </fieldset>
 
-            <p>¿Impresión del precio?</p>
-            <p>
-                <input type="radio" id="precio-si" name="impresion-precio" value="si">
-                <label for="precio-si">Sí</label>
-            </p>
-            <p>
-                <input type="radio" id="precio-no" name="impresion-precio" value="no">
-                <label for="precio-no">No</label>
-            </p>
+<fieldset>
+    <legend>¿Impresión del precio?</legend>
+    <label><input type="radio" name="impresion-precio" value="si"> Sí</label>
+    <label><input type="radio" name="impresion-precio" value="no"> No</label>
+</fieldset>
 
-            <p><button type="submit">Solicitar</button></p>
+<p><button type="submit"><i class="fa-solid fa-print" aria-hidden="true"></i>Solicitar</button></p>
 
         </form>
 
