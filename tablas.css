@@ -1,0 +1,25 @@
+/* Tablas: bordes, cabecera, estilo cebra y hover */
+table {
+    width: 100%;
+    margin: 0 0 var(--espacio);
+    border-collapse: collapse;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+}
+
+caption {
+    padding: 0.5rem 0;
+    text-align: left;
+    font: 600 1.1rem/1.3 var(--fuente-titulos);
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid var(--color-borde);
+}
+
+th[scope="col"] { color: var(--color-superficie); background: var(--color-texto); }
+th[scope="row"] { background: var(--color-fondo); }
+tr:nth-child(even) td { background: var(--color-fondo); }
+tr:hover td { background: var(--color-borde); }

@@ -1,0 +1,86 @@
+/* Componentes: clases .conBorde y .anuncio, listados, menú y botones */
+/*Cosas reutilizables*/
+.conBorde {
+    box-sizing: border-box;
+    padding: 1.5rem;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+}
+
+/* Listados en rejilla (anuncios y menú de usuario) */
+main ul, section ul { margin: 0; padding: 0; list-style: none; }
+
+main > ul, section > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--espacio);
+}
+
+/* Miniaturas de fotos del anuncio */
+article > ul { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+article > ul img { width: 6rem; border: 1px solid var(--color-borde); border-radius: 0.25rem; }
+article > p > img { display: block; width: 100%; border-radius: var(--radio); }
+
+/* Anuncio: tarjeta completa clicable */
+.anuncio {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+}
+
+.anuncio p, .anuncio h2, .anuncio h3 { margin: 0; padding: 0.25rem 1rem; }
+.anuncio p:first-child { padding: 0; }
+.anuncio h2, .anuncio h3 { padding-top: 1rem; }
+.anuncio p:nth-child(4) { color: var(--color-texto-suave); font-size: 0.9rem; }
+
+.anuncio p:last-child {
+    padding-bottom: 1rem;
+    color: var(--color-primario);
+    font: 700 1.25rem/1.4 var(--fuente-titulos);
+}
+
+.anuncio a { color: var(--color-texto); text-decoration: none; }
+
+.anuncio a::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.anuncio:hover, .anuncio:focus-within { border-color: var(--color-primario); }
+
+/* Menú de usuario registrado */
+main > ul > li > a {
+    display: block;
+    padding: 1.25rem;
+    color: var(--color-texto);
+    font-weight: 600;
+    text-decoration: none;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+}
+
+main > ul > li > a:hover { color: var(--color-primario); border-color: var(--color-primario); }
+
+button {
+    padding: 0.75rem 1.5rem;
+    color: var(--color-superficie);
+    font: 600 1rem/1 var(--fuente-texto);
+    background: var(--color-primario);
+    border: 0;
+    border-radius: var(--radio);
+    cursor: pointer;
+}
+
+button:hover { background: var(--color-texto); }

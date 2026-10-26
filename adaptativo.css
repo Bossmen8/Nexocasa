@@ -1,0 +1,23 @@
+/* Diseño adaptativo (el resto de módulos están pensados para pantallas pequeñas) */
+
+/* Móvil: hasta 480px de ancho */
+@media (max-width: 480px) {
+    header { padding: var(--espacio); }
+    header > p:first-child { font-size: 1.25rem; }
+    main { padding: var(--espacio) 0.75rem; }
+    h1 { font-size: 1.5rem; }
+    .conBorde { padding: var(--espacio); }
+    th, td { padding: 0.5rem; font-size: 0.9rem; }
+}
+
+/* Tableta y escritorio: formularios con etiqueta a la izquierda y control a la derecha */
+@media (min-width: 600px) {
+    form p { grid-template-columns: var(--ancho-etiqueta) 1fr; }
+    form p > button, form p > output { grid-column: 2; }
+}
+
+/* Pantallas grandes: 1920px o más */
+@media (min-width: 1920px) {
+    html { font-size: 112.5%; }
+    :root { --ancho-contenedor: 90rem; }
+}

@@ -1,0 +1,20 @@
+/* Variables: para crear variantes basta con cambiar este fichero */
+:root {
+    /* Colores (6) */
+    --color-primario: #f97400;
+    --color-texto: #1f2937;
+    --color-texto-suave: #4b5563;
+    --color-fondo: #f3f4f6;
+    --color-superficie: #ffffff;
+    --color-borde: #d1d5db;
+
+    /* Tipografías (2) */
+    --fuente-titulos: "Poppins", "Segoe UI", Arial, sans-serif;
+    --fuente-texto: "Inter", "Segoe UI", Arial, sans-serif;
+
+    /* Medidas */
+    --espacio: 1rem;
+    --radio: 0.5rem;
+    --ancho-contenedor: 75rem;
+    --ancho-etiqueta: 12rem;
+}
