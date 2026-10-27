@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/* Estilo "modo noche": fondos oscuros y texto gris claro (sin blanco puro). */
+:root {
+    --fondo: #121212;
+    --superficie: #1e1e1e;
+    --texto: #e0e0e0;
+    --enlace: #8ab4f8;
+    --visitado: #c9a7f5;
+    --borde: #4a4a4a;
+    --boton-fondo: #8ab4f8;
+    --boton-texto: #121212
+}
+
+html body,
+html body * {
+    background-color: var(--fondo) !important;
+    color: var(--texto) !important;
+    border-color: var(--borde) !important;
+    box-shadow: none !important;
+    text-shadow: none !important
+}
+
+html body header,
+html body footer,
+html body nav,
+html body .conBorde,
+html body .anuncio,
+html body table,
+html body th,
+html body td,
+html body header *,
+html body footer *,
+html body nav *,
+html body .conBorde *,
+html body .anuncio * {
+    background-color: var(--superficie) !important
+}
+
+html body a,
+html body a * {
+    color: var(--enlace) !important
+}
+
+html body a:visited,
+html body a:visited * {
+    color: var(--visitado) !important
+}
+
+html body a:hover,
+html body a:focus {
+    text-decoration: underline !important
+}
+
+html body input,
+html body select,
+html body textarea {
+    background-color: #2a2a2a !important;
+    color: var(--texto) !important;
+    border: 1px solid #888 !important
+}
+
+html body ::placeholder {
+    color: #a8a8a8 !important;
+    opacity: 1
+}
+
+html body button,
+html body input[type="submit"],
+html body input[type="button"] {
+    background-color: var(--boton-fondo) !important;
+    color: var(--boton-texto) !important;
+    border: 1px solid var(--boton-fondo) !important
+}
+
+html body button * {
+    background-color: transparent !important;
+    color: var(--boton-texto) !important
+}
+
+html body :focus-visible {
+    outline: 3px solid #ffd54f !important;
+    outline-offset: 2px
+}
+
+html body img {
+    filter: brightness(.85) contrast(1.05)
+}
