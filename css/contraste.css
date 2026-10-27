@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+:root {
+   --fondo: #fff;
+   --texto: #000;
+   --enlace: #0000b3;
+   --visitado: #4b0082;
+   --borde: #000;
+   --cab-fondo: #00264d;
+   --cab-texto: #fff;
+   --cab-enlace: #ffe066;
+   --boton-fondo: #00264d;
+   --boton-texto: #fff
+}
+
+html body,
+html body * {
+   background-color: var(--fondo) !important;
+   background-image: none !important;
+   color: var(--texto) !important;
+   border-color: var(--borde) !important;
+   box-shadow: none !important;
+   text-shadow: none !important;
+   opacity: 1 !important
+}
+
+html body header,
+html body footer,
+html body header *,
+html body footer * {
+   background-color: var(--cab-fondo) !important;
+   color: var(--cab-texto) !important
+}
+
+html body header a,
+html body footer a,
+html body header a *,
+html body footer a * {
+   color: var(--cab-enlace) !important
+}
+
+html body a,
+html body a * {
+   color: var(--enlace) !important;
+   text-decoration: underline !important
+}
+
+html body a:visited,
+html body a:visited * {
+   color: var(--visitado) !important
+}
+
+html body header a:visited,
+html body footer a:visited {
+   color: #ffd0ff !important
+}
+
+html body a:hover,
+html body a:focus {
+   text-decoration-thickness: 3px !important
+}
+
+html body .conBorde,
+html body .anuncio,
+html body table,
+html body th,
+html body td {
+   border: 2px solid var(--borde) !important
+}
+
+html body input,
+html body select,
+html body textarea {
+   background-color: #fff !important;
+   color: #000 !important;
+   border: 2px solid #000 !important
+}
+
+html body button,
+html body input[type="submit"],
+html body input[type="button"] {
+   background-color: var(--boton-fondo) !important;
+   color: var(--boton-texto) !important;
+   border: 2px solid #000 !important;
+   font-weight: bold
+}
+
+html body button * {
+   background-color: transparent !important;
+   color: var(--boton-texto) !important
+}
+
+html body :focus-visible {
+   outline: 4px solid #b30000 !important;
+   outline-offset: 3px
+}
+
+html body header :focus-visible,
+html body footer :focus-visible {
+   outline-color: #fff !important
+}

@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/* Estilo para impresión (media="print", SIN atributo title).
+   Se carga solo en impresión; no depende del estilo de pantalla. */
+@page{size:A4 portrait;margin:2cm 2cm 2.2cm 2cm}
+html{font-size:12pt}
+*,*::before,*::after{background:#fff!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;float:none!important}
+body{font-family:Georgia,'Times New Roman',Times,serif;font-size:12pt;line-height:1.4;margin:0;padding:0;width:auto}
+/* Elementos no esenciales o interactivos */
+nav,.saltar,button,input[type="submit"],input[type="button"],form:not(.imprimible),
+img[alt=""],.fa-solid,.fa-regular,.fa-brands,i[aria-hidden="true"],video,audio,iframe,script{display:none!important}
+/* Estructura */
+main,section,article,header,footer{display:block;width:auto;margin:0;padding:0;border:0;column-count:1}
+header{border-bottom:1pt solid #000;margin-bottom:1cm;padding-bottom:.3cm}
+header a{font-size:20pt;font-weight:bold;text-decoration:none}
+header a::after{content:none!important}
+h1{font-size:20pt;margin:0 0 .6cm}
+h2{font-size:16pt;margin:.8cm 0 .3cm}
+h3{font-size:13pt;margin:.5cm 0 .2cm}
+h1,h2,h3{page-break-after:avoid;break-after:avoid}
+p,li{orphans:3;widows:3}
+.anuncio,article,tr,img,blockquote{page-break-inside:avoid;break-inside:avoid}
+ul{list-style:none;margin:0;padding:0}
+li{margin:0 0 .5cm}
+.anuncio{border:1pt solid #000!important;padding:.3cm!important}
+/* Imágenes con contenido */
+img{max-width:8cm;height:auto}
+/* Enlaces: subrayados y con su URL */
+a{text-decoration:underline;font-weight:bold}
+a[href]:not([href^="#"]):not([href^="javascript"])::after{content:" (" attr(href) ")";font-weight:normal;font-size:10pt;word-wrap:break-word}
+/* Tablas */
+table{border-collapse:collapse;width:100%}
+th,td{border:1pt solid #000!important;padding:.15cm .25cm;text-align:left}
+thead{display:table-header-group}
+/* Pie con aviso de derechos */
+footer{border-top:1pt solid #000;margin-top:1cm;padding-top:.3cm;font-size:10pt}
+footer::after{content:"Documento impreso desde Nexocasa. Todos los derechos reservados. Queda prohibida su reproducción con fines comerciales sin autorización.";display:block;margin-top:.2cm}
