@@ -23,3 +23,9 @@ th[scope="col"] { color: var(--color-superficie); background: var(--color-texto)
 th[scope="row"] { background: var(--color-fondo); }
 tr:nth-child(even) td { background: var(--color-fondo); }
 tr:hover td { background: var(--color-borde); }
+
+/* Tabla de posibles costes del folleto (generada con JavaScript) */
+.tabla-desplazable { overflow-x: auto; }
+th[scope="colgroup"] { color: var(--color-superficie); text-align: center; background: var(--color-texto); }
+.tabla-costes td { text-align: right; font-variant-numeric: tabular-nums; }
+.tabla-costes th[scope="row"] { text-align: right; }

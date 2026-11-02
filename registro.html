@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexocasa | Inicio</title>
+    <title>Nexocasa | Registro de nuevo usuario</title>
     <link rel="icon" href="./img/Favicon Nexocasa.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/estilos.css">
@@ -30,51 +30,46 @@
 
        <main id="contenido">
               <h1>Regístrate como nuevo usuario</h1>
+              <p>Los campos marcados con un asterisco (*) son obligatorios.</p>
 
-              <form class="conBorde" action="index.html" method="get">
+              <form id="formulario-registro" class="conBorde" action="index.html" method="get" novalidate>
+                     <div class="resumen-errores oculto" role="alert" tabindex="-1"></div>
 
                      <p>
-                            <label for="usuario"><i class="fa-solid fa-user" aria-hidden="true"></i>Nombre de usuario</label><br>
-                            <input type="text" id="usuario" name="usuario" pattern="[A-Za-z][A-Za-z0-9]{2,14}"
-                                   minlength="3" maxlength="15"
-                                   title="Solo letras y números, sin empezar por un número. Entre 3 y 15 caracteres."
-                                   required>
+                            <label for="usuario"><i class="fa-solid fa-user" aria-hidden="true"></i>Nombre de usuario *</label><br>
+                            <input type="text" id="usuario" name="usuario" autocomplete="username">
+                            <small class="ayuda" id="ayuda-usuario">Entre 3 y 15 caracteres: letras del alfabeto inglés y números, sin empezar por un número. Ejemplo: Maria2026</small>
                      </p>
 
                      <p>
-                            <label for="password"><i class="fa-solid fa-lock" aria-hidden="true"></i>Contraseña</label><br>
-                            <input type="password" id="password" name="password"
-                                   pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9_-]{6,15}" minlength="6"
-                                   maxlength="15"
-                                   title="Entre 6 y 15 caracteres, con letras, números, guion o guion bajo. Al menos una mayúscula, una minúscula y un número."
-                                   required>
+                            <label for="password"><i class="fa-solid fa-lock" aria-hidden="true"></i>Contraseña *</label><br>
+                            <input type="password" id="password" name="password" autocomplete="new-password">
+                            <small class="ayuda" id="ayuda-password">Entre 6 y 15 caracteres: letras del alfabeto inglés, números, guion (-) y guion bajo (_). Debe incluir al menos una mayúscula, una minúscula y un número. Ejemplo: Casa_2026</small>
                      </p>
 
                      <p>
-                            <label for="repetir-password"><i class="fa-solid fa-lock" aria-hidden="true"></i>Repetir contraseña</label><br>
-                            <input type="password" id="repetir-password" name="repetir-password"
-                                   pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9_-]{6,15}" minlength="6"
-                                   maxlength="15" title="Debe coincidir con la contraseña indicada." required>
+                            <label for="repetir-password"><i class="fa-solid fa-lock" aria-hidden="true"></i>Repetir contraseña *</label><br>
+                            <input type="password" id="repetir-password" name="repetir-password" autocomplete="new-password">
+                            <small class="ayuda" id="ayuda-repetir-password">Escribe de nuevo la misma contraseña.</small>
                      </p>
 
                      <p>
-                            <label for="email">&#9993; Dirección de email</label><br>
-                            <input type="email" id="email" name="email" maxlength="254"
-                                   pattern="[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(\.[A-Za-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+"
-                                   required>
+                            <label for="email">&#9993; Dirección de email *</label><br>
+                            <input type="text" id="email" name="email" inputmode="email" autocomplete="email">
+                            <small class="ayuda" id="ayuda-email">Ejemplo: nombre.apellido@dominio.es</small>
                      </p>
 
-                     <fieldset>
-                         <legend>Sexo</legend>
-                         <label><input type="radio" name="sexo" value="hombre" required> Hombre</label>
-                         <label><input type="radio" name="sexo" value="mujer" required> Mujer</label>
-                         <label><input type="radio" name="sexo" value="otro" required> Otro</label>
+                     <fieldset id="grupo-sexo">
+                         <legend>Sexo *</legend>
+                         <label><input type="radio" name="sexo" value="hombre"> Hombre</label>
+                         <label><input type="radio" name="sexo" value="mujer"> Mujer</label>
+                         <label><input type="radio" name="sexo" value="otro"> Otro</label>
                      </fieldset>
 
 <p>
-                            <label for="fecha-nacimiento">Fecha de nacimiento</label><br>
-                            <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" min="1900-01-01"
-                                   max="2008-09-27" required>
+                            <label for="fecha-nacimiento">Fecha de nacimiento *</label><br>
+                            <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" inputmode="numeric">
+                            <small class="ayuda" id="ayuda-fecha-nacimiento">Formato dd/mm/aaaa. Debes tener al menos 18 años cumplidos. Ejemplo: 25/03/1990</small>
                      </p>
 
                      <p>
@@ -113,6 +108,9 @@
               <p>&copy; 2026 Nexocasa</p>
        </footer>
 
+<script src="js/validaciones.js"></script>
+<script src="js/interfaz.js"></script>
+<script src="js/registro.js"></script>
 </body>
 
 </html>

@@ -187,12 +187,22 @@
 
         </form>
 
+        <section class="conBorde" aria-labelledby="titulo-costes">
+            <h2 id="titulo-costes">Posibles costes de un folleto</h2>
+            <p>Consulta una tabla orientativa con el coste según el número de páginas, de fotos, el color y la resolución (se supone una media de 3 fotos por página).</p>
+            <p>
+                <button type="button" id="boton-costes" aria-expanded="false" aria-controls="contenedor-costes"><i class="fa-solid fa-table" aria-hidden="true"></i><span id="texto-boton-costes">Mostrar tabla de costes</span></button>
+            </p>
+            <div id="contenedor-costes" class="tabla-desplazable oculto"></div>
+        </section>
+
     </main>
 
     <footer>
         <p>&copy; 2026 Nexocasa</p>
     </footer>
 
+<script src="js/folleto.js"></script>
 </body>
 
 </html>
