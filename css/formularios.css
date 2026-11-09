@@ -44,3 +44,33 @@ input[type="color"] { width: 4rem; height: 2.5rem; padding: 0.15rem; }
 input[type="range"] { padding: 0; border: 0; }
 textarea { resize: vertical; }
 output { font-weight: 600; }
+
+/* Validación con JavaScript: ayudas, mensajes de error y resumen.
+   Los temas alternativos fuerzan colores, así que el error no depende solo del color:
+   lleva texto, un símbolo (⚠) y un contorno discontinuo. */
+.ayuda { color: var(--color-texto-suave); font-size: 0.9rem; }
+
+.mensaje-error {
+    display: block;
+    color: var(--color-error);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.mensaje-error:empty { display: none; }
+.mensaje-error::before { content: "\26A0\FE0F  "; content: "\26A0\FE0F  " / ""; }
+
+[aria-invalid="true"] { outline: 2px dashed var(--color-error); outline-offset: 1px; }
+.con-error > label, .con-error > legend { color: var(--color-error); }
+
+.resumen-errores {
+    box-sizing: border-box;
+    margin: 0 0 var(--espacio);
+    padding: var(--espacio);
+    border: 2px solid var(--color-error);
+    border-radius: var(--radio);
+}
+
+.resumen-errores:focus { outline: 3px solid var(--color-error); outline-offset: 2px; }
+.resumen-errores h3 { margin: 0 0 0.5rem; color: var(--color-error); font-size: 1.05rem; }
+.resumen-errores ul { display: block; margin: 0; padding-left: 1.25rem; list-style: disc; }

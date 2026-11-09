@@ -13,7 +13,7 @@
 /* Tableta y escritorio: formularios con etiqueta a la izquierda y control a la derecha */
 @media (min-width: 600px) {
     form p { grid-template-columns: var(--ancho-etiqueta) 1fr; }
-    form p > button, form p > output { grid-column: 2; }
+    form p > button, form p > output, form p > .ayuda, form p > .mensaje-error { grid-column: 2; }
 }
 
 /* Pantallas grandes: 1920px o más */

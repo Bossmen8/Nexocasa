@@ -84,3 +84,6 @@ button {
 }
 
 button:hover { background: var(--color-texto); }
+
+/* Contenido que se muestra/oculta con JavaScript */
+.oculto { display: none; }
