@@ -1,67 +1,43 @@
 <?php
-/*
- * Datos de los DOS anuncios de ejemplo que se muestran en "Detalle anuncio" y "Ver anuncio".
- * Este fichero SOLO guarda estos datos. En una práctica posterior se leerán de una base de datos.
- *
- *   'par'   → se muestra cuando el identificador recibido es un número par.
- *   'impar' → se muestra cuando el identificador recibido es un número impar.
- *
- * También se usan como anuncios del usuario en "Mis anuncios" (con el identificador 'id').
- */
+// Los 2 anuncios de ejemplo. Este fichero solo guarda estos datos; más adelante estarán en la base de datos.
+// 'impar' se muestra cuando el id recibido es impar y 'par' cuando es par.
 return [
     'impar' => [
-        'id'           => 1,
-        'tipoAnuncio'  => 'venta',
-        'tipoVivienda' => 'vivienda',
-        'foto'         => 'img/casa-madrid.svg',
-        'altFoto'      => 'Fachada del chalet adosado de diseño en Madrid',
-        'titulo'       => 'Chalet adosado de diseño',
-        'precio'       => 340000,
-        'texto'        => 'Chalet adosado de reciente construcción situado en una zona tranquila de Madrid, '
-                        . 'con jardín privado y a pocos minutos del centro.',
-        'fecha'        => '2026-09-20',
-        'ciudad'       => 'Madrid',
-        'pais'         => 'espana',
-        'caracteristicas' => [
-            'superficie'   => 180,
-            'habitaciones' => 4,
-            'banos'        => 3,
-            'planta'       => 2,
-            'anio'         => 2021,
-        ],
-        'fotos' => [
-            ['src' => 'img/casa-madrid.svg',   'alt' => 'Fachada del chalet'],
-            ['src' => 'img/casa-madrid-2.svg', 'alt' => 'Balcón del chalet'],
-            ['src' => 'img/casa-madrid-3.svg', 'alt' => 'Cocina del chalet'],
-            ['src' => 'img/casa-madrid-4.svg', 'alt' => 'Salón del chalet'],
-        ],
+        'id' => 1,
+        'tipoAnuncio' => 'Venta',
+        'tipoVivienda' => 'Vivienda',
+        'foto' => 'img/casa-madrid.svg',
+        'titulo' => 'Chalet adosado de diseño',
+        'precio' => '340.000 €',
+        'texto' => 'Chalet adosado de reciente construcción situado en una zona tranquila de Madrid, con jardín privado y a pocos minutos del centro.',
+        'fecha' => '20/09/2026',
+        'ciudad' => 'Madrid',
+        'pais' => 'España',
+        'superficie' => '180 m²',
+        'habitaciones' => 4,
+        'banos' => 3,
+        'planta' => 2,
+        'anio' => 2021,
+        'fotos' => ['img/casa-madrid.svg', 'img/casa-madrid-2.svg', 'img/casa-madrid-3.svg', 'img/casa-madrid-4.svg'],
         'usuario' => 'paquito123',
     ],
     'par' => [
-        'id'           => 2,
-        'tipoAnuncio'  => 'alquiler',
-        'tipoVivienda' => 'vivienda',
-        'foto'         => 'img/casa-barcelona.svg',
-        'altFoto'      => 'Ático luminoso con terraza en Barcelona',
-        'titulo'       => 'Ático luminoso con terraza',
-        'precio'       => 1350,
-        'texto'        => 'Ático exterior muy luminoso en el Eixample, con una terraza de 30 m² con vistas, '
-                        . 'cocina equipada y cerca del metro.',
-        'fecha'        => '2026-09-19',
-        'ciudad'       => 'Barcelona',
-        'pais'         => 'espana',
-        'caracteristicas' => [
-            'superficie'   => 95,
-            'habitaciones' => 2,
-            'banos'        => 2,
-            'planta'       => 7,
-            'anio'         => 2008,
-        ],
-        'fotos' => [
-            ['src' => 'img/casa-barcelona.svg', 'alt' => 'Terraza del ático'],
-            ['src' => 'img/casa-madrid-3.svg',  'alt' => 'Cocina del ático'],
-            ['src' => 'img/casa-madrid-4.svg',  'alt' => 'Salón del ático'],
-        ],
+        'id' => 2,
+        'tipoAnuncio' => 'Alquiler',
+        'tipoVivienda' => 'Vivienda',
+        'foto' => 'img/casa-barcelona.svg',
+        'titulo' => 'Ático luminoso con terraza',
+        'precio' => '1.350 € al mes',
+        'texto' => 'Ático exterior muy luminoso, con una terraza de 30 m² con vistas, cocina equipada y cerca del metro.',
+        'fecha' => '19/09/2026',
+        'ciudad' => 'Barcelona',
+        'pais' => 'España',
+        'superficie' => '95 m²',
+        'habitaciones' => 2,
+        'banos' => 2,
+        'planta' => 7,
+        'anio' => 2008,
+        'fotos' => ['img/casa-barcelona.svg', 'img/casa-madrid-3.svg', 'img/casa-madrid-4.svg'],
         'usuario' => 'mlopez23',
     ],
 ];

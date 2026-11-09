@@ -1,28 +1,25 @@
 <?php
-/*
- * Detalle de un anuncio (parte pública). Recibe el identificador por la URL: detalle-anuncio.php?id=N
- * Si N es par se muestra un anuncio y si es impar el otro (datos/anuncios.php).
- */
-require_once 'includes/funciones.php';
-require_once 'includes/anuncios.php';
+// Detalle de un anuncio: detalle-anuncio.php?id=N
+// Si N es par se muestra el anuncio 'par' y si es impar el anuncio 'impar' (datos/anuncios.php).
+$titulo = 'Detalle del anuncio';
+require 'includes/cabecera.php';
+require 'includes/inicio.php';
 
-$anuncio = obtenerAnuncio(leerId('id'));
-if ($anuncio === null) {
-    // Falta el identificador o no es un número positivo
-    http_response_code(404);
-}
-
-$titulo = $anuncio['titulo'] ?? 'Anuncio no encontrado';
-require_once 'includes/cabecera.php';
-require_once 'includes/inicio.php';
+$id = $_GET['id'] ?? '';
+$anuncios = require 'datos/anuncios.php';
 ?>
 <main id="contenido" class="columnas">
-<?php if ($anuncio): ?>
-<?php fichaAnuncio($anuncio, false); ?>
-<?php else: ?>
+<?php if (!ctype_digit($id)): ?>
 <h1>Anuncio no encontrado</h1>
-<p>El anuncio que buscas no existe o el enlace no es correcto.</p>
-<p><a href="index.php">Volver a la página principal</a></p>
+<p>El enlace no es correcto. <a href="index.php">Volver al inicio</a></p>
+<?php else:
+    $anuncio = ($id % 2 == 0) ? $anuncios['par'] : $anuncios['impar'];
+    require 'includes/ficha-anuncio.php'; ?>
+<section>
+<h2>Anunciante</h2>
+<p>Usuario: <?= e($anuncio['usuario']) ?></p>
+<p><a href="enviar-mensaje.php">Enviar mensaje al anunciante</a></p>
+</section>
 <?php endif; ?>
 </main>
-<?php require_once 'includes/pie.php'; ?>
+<?php require 'includes/pie.php'; ?>

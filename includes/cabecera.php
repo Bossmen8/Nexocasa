@@ -1,14 +1,6 @@
 <?php
-/*
- * PLANTILLA (1/3) - Cabecera del documento: DOCTYPE, <html>, <head> y hojas de estilo.
- *
- * Variables que debe definir la página antes de incluir este fichero:
- *   $titulo  Título de la página (se muestra en <title>).
- */
+// PLANTILLA 1/3: DOCTYPE y <head>. La página tiene que definir $titulo antes de incluirla.
 require_once __DIR__ . '/funciones.php';
-require_once __DIR__ . '/listas.php';
-
-$titulo = $titulo ?? 'Nexocasa';
 ?>
 <!DOCTYPE html>
 <html lang="es">

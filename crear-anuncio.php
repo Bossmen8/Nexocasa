@@ -1,63 +1,56 @@
 <?php
-/*
- * "Crear anuncio" (parte privada): formulario con los datos necesarios para crear un anuncio.
- * La página de respuesta se hará en una práctica posterior (de momento el formulario va a error-404.php).
- */
+// Crear anuncio (parte privada): solo el formulario. La respuesta se hará en otra práctica.
 $titulo = 'Crear anuncio';
 $zona = 'privada';
-require_once 'includes/cabecera.php';
-require_once 'includes/inicio.php';
+require 'includes/cabecera.php';
+require 'includes/inicio.php';
 ?>
 <main id="contenido">
 <h1>Crear un anuncio nuevo</h1>
-<p>Los campos marcados con un asterisco (*) son obligatorios.</p>
 <form class="conBorde" action="error-404.php" method="post">
 <fieldset>
 <legend>Tipo de anuncio *</legend>
-<?= radios('tipo-anuncio', TIPOS_ANUNCIO) ?>
+<label><input type="radio" name="tipo-anuncio" value="alquiler"> Alquiler</label>
+<label><input type="radio" name="tipo-anuncio" value="venta"> Venta</label>
 </fieldset>
 <p>
 <label for="tipo-vivienda">Tipo de vivienda *</label><br>
-<select id="tipo-vivienda" name="tipo-vivienda" required>
-<?= opciones(TIPOS_VIVIENDA, '', '(Elige un tipo)') ?>
+<select id="tipo-vivienda" name="tipo-vivienda">
+<option value="garaje">Garaje</option>
+<option value="local">Local</option>
+<option value="obra-nueva">Obra nueva</option>
+<option value="oficina">Oficina</option>
+<option value="vivienda" selected>Vivienda</option>
 </select>
 </p>
-<p>
-<label for="titulo-anuncio">Título *</label><br>
-<input type="text" id="titulo-anuncio" name="titulo" maxlength="100" required>
-</p>
-<p>
-<label for="precio">Precio (€) *</label><br>
-<input type="number" id="precio" name="precio" min="0" step="1" required>
-</p>
-<p>
-<label for="texto">Texto del anuncio *</label><br>
-<textarea id="texto" name="texto" rows="6" cols="50" maxlength="4000" required></textarea>
-</p>
-<p>
-<label for="ciudad">Ciudad *</label><br>
-<input type="text" id="ciudad" name="ciudad" required>
-</p>
+<p><label for="titulo-anuncio">Título *</label><br><input type="text" id="titulo-anuncio" name="titulo"></p>
+<p><label for="precio">Precio (€) *</label><br><input type="number" id="precio" name="precio" min="0"></p>
+<p><label for="texto">Texto *</label><br><textarea id="texto" name="texto" rows="6" cols="50"></textarea></p>
+<p><label for="ciudad">Ciudad *</label><br><input type="text" id="ciudad" name="ciudad"></p>
 <p>
 <label for="pais">País *</label><br>
-<select id="pais" name="pais" required>
-<?= opciones(PAISES, 'espana') ?>
+<select id="pais" name="pais">
+<option value="alemania">Alemania</option>
+<option value="argentina">Argentina</option>
+<option value="belgica">Bélgica</option>
+<option value="colombia">Colombia</option>
+<option value="espana" selected>España</option>
+<option value="francia">Francia</option>
+<option value="italia">Italia</option>
+<option value="mexico">México</option>
+<option value="portugal">Portugal</option>
+<option value="reino-unido">Reino Unido</option>
 </select>
 </p>
 <fieldset>
 <legend>Características</legend>
-<p><label for="superficie">Superficie (m²)</label>
-<input type="number" id="superficie" name="superficie" min="1" step="1"></p>
-<p><label for="habitaciones">Número de habitaciones</label>
-<input type="number" id="habitaciones" name="habitaciones" min="0" step="1"></p>
-<p><label for="banos">Número de baños</label>
-<input type="number" id="banos" name="banos" min="0" step="1"></p>
-<p><label for="planta">Planta</label>
-<input type="number" id="planta" name="planta" step="1"></p>
-<p><label for="anio">Año de construcción</label>
-<input type="number" id="anio" name="anio" min="1800" max="2100" step="1"></p>
+<p><label for="superficie">Superficie (m²)</label> <input type="number" id="superficie" name="superficie" min="1"></p>
+<p><label for="habitaciones">Habitaciones</label> <input type="number" id="habitaciones" name="habitaciones" min="0"></p>
+<p><label for="banos">Baños</label> <input type="number" id="banos" name="banos" min="0"></p>
+<p><label for="planta">Planta</label> <input type="number" id="planta" name="planta"></p>
+<p><label for="anio">Año de construcción</label> <input type="number" id="anio" name="anio"></p>
 </fieldset>
-<p><button type="submit"><i class="fa-solid fa-circle-plus" aria-hidden="true"></i>Crear anuncio</button></p>
+<p><button type="submit">Crear anuncio</button></p>
 </form>
 </main>
-<?php require_once 'includes/pie.php'; ?>
+<?php require 'includes/pie.php'; ?>

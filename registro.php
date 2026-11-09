@@ -1,120 +1,88 @@
 <?php
-/*
- * Formulario de registro como nuevo usuario. Envía los datos por POST a respuesta-registro.php.
- * Si hay errores, respuesta-registro.php redirige aquí con los errores y los datos en la URL:
- *   registro.php?errores[0]=usuario-vacio&usuario=...&email=...
- * Entonces se muestra un resumen de errores al principio, un mensaje junto a cada campo erróneo
- * y cada campo se rellena con lo que el usuario había escrito (salvo las contraseñas).
- */
-$titulo = 'Registro de nuevo usuario';
-require_once 'includes/cabecera.php';
-require_once 'includes/inicio.php';
-require_once 'includes/registro-validacion.php';
-$scriptsValidacion = ['js/validaciones.js', 'js/interfaz.js', 'js/registro.js'];
+// Formulario de registro (POST a respuesta-registro.php).
+// Si hay errores, respuesta-registro.php vuelve aquí con los errores y los datos en la URL:
+//   registro.php?errores=usuario,no-coinciden&usuario=...&email=...
+// Entonces se muestran los errores arriba y los campos se rellenan con lo que se había escrito.
+$titulo = 'Registro';
+require 'includes/cabecera.php';
+require 'includes/inicio.php';
 
-// Errores recibidos por la URL (solo se aceptan los códigos conocidos)
-$codigos = isset($_GET['errores']) && is_array($_GET['errores']) ? $_GET['errores'] : [];
-$errores = [];      // campo => mensaje
-$resumen = [];      // lista de mensajes
-foreach ($codigos as $codigo) {
-    if (is_string($codigo) && isset(ERRORES_REGISTRO[$codigo])) {
-        $errores[ERRORES_REGISTRO[$codigo]['campo']] = ERRORES_REGISTRO[$codigo]['texto'];
-        $resumen[] = ERRORES_REGISTRO[$codigo]['texto'];
-    }
-}
+$mensajes = [
+    'usuario' => 'Tienes que escribir el nombre de usuario.',
+    'password' => 'Tienes que escribir la contraseña.',
+    'repetir' => 'Tienes que repetir la contraseña.',
+    'no-coinciden' => 'Las contraseñas no coinciden.',
+];
+$errores = isset($_GET['errores']) ? explode(',', $_GET['errores']) : [];
 
-// Valores previos de los campos (vacíos la primera vez)
-$v = [];
-foreach (CAMPOS_REGISTRO as $campo) {
-    $v[$campo] = leer($_GET, $campo);
-}
-if ($v['pais'] === '') {
-    $v['pais'] = 'espana';
-}
-
-/** Atributos y mensaje de error de un campo, si tiene error. */
-function claseError(array $errores, string $campo): string
+// Valor anterior de un campo (o '' si no hay)
+function valor($campo)
 {
-    return isset($errores[$campo]) ? ' class="con-error"' : '';
-}
-function atributosError(array $errores, string $campo): string
-{
-    return isset($errores[$campo]) ? ' aria-invalid="true" aria-describedby="error-' . $campo . '"' : '';
-}
-function mensajeError(array $errores, string $campo): string
-{
-    return isset($errores[$campo])
-        ? '<span class="mensaje-error" id="error-' . $campo . '">' . e($errores[$campo]) . '</span>'
-        : '';
+    return e($_GET[$campo] ?? '');
 }
 ?>
 <main id="contenido">
 <h1>Regístrate como nuevo usuario</h1>
-<p>Los campos marcados con un asterisco (*) son obligatorios.</p>
-<form id="formulario-registro" class="conBorde" action="respuesta-registro.php" method="post" enctype="multipart/form-data"<?= novalidate() ?>>
-<?php if ($resumen): ?>
-<?php mostrarErrores($resumen, 'Corrige los siguientes errores'); ?>
-<?php else: ?>
-<div class="resumen-errores oculto" role="alert" tabindex="-1"></div>
+<form class="conBorde" action="respuesta-registro.php" method="post" enctype="multipart/form-data" novalidate>
+<?php if ($errores): ?>
+<div class="resumen-errores" role="alert">
+<ul>
+<?php foreach ($errores as $error): ?>
+<?php if (isset($mensajes[$error])): ?>
+<li><?= $mensajes[$error] ?></li>
 <?php endif; ?>
-
-<p<?= claseError($errores, 'usuario') ?>>
-<label for="usuario"><i class="fa-solid fa-user" aria-hidden="true"></i>Nombre de usuario *</label><br>
-<input type="text" id="usuario" name="usuario" autocomplete="username" value="<?= e($v['usuario']) ?>"<?= atributosError($errores, 'usuario') ?>>
-<small class="ayuda" id="ayuda-usuario">Entre 3 y 15 caracteres: letras del alfabeto inglés y números, sin empezar por un número. Ejemplo: Maria2026</small>
-<?= mensajeError($errores, 'usuario') ?>
-</p>
-
-<p<?= claseError($errores, 'password') ?>>
-<label for="password"><i class="fa-solid fa-lock" aria-hidden="true"></i>Contraseña *</label><br>
-<input type="password" id="password" name="password" autocomplete="new-password"<?= atributosError($errores, 'password') ?>>
-<small class="ayuda" id="ayuda-password">Entre 6 y 15 caracteres: letras del alfabeto inglés, números, guion (-) y guion bajo (_). Debe incluir al menos una mayúscula, una minúscula y un número. Ejemplo: Casa_2026</small>
-<?= mensajeError($errores, 'password') ?>
-</p>
-
-<p<?= claseError($errores, 'repetir-password') ?>>
-<label for="repetir-password"><i class="fa-solid fa-lock" aria-hidden="true"></i>Repetir contraseña *</label><br>
-<input type="password" id="repetir-password" name="repetir-password" autocomplete="new-password"<?= atributosError($errores, 'repetir-password') ?>>
-<small class="ayuda" id="ayuda-repetir-password">Escribe de nuevo la misma contraseña.<?= $resumen ? ' Por seguridad, las contraseñas no se guardan entre intentos: vuelve a escribirlas.' : '' ?></small>
-<?= mensajeError($errores, 'repetir-password') ?>
-</p>
-
-
+<?php endforeach; ?>
+</ul>
+</div>
+<?php endif; ?>
 <p>
-<label for="email">&#9993; Dirección de email *</label><br>
-<input type="text" id="email" name="email" inputmode="email" autocomplete="email" value="<?= e($v['email']) ?>">
-<small class="ayuda" id="ayuda-email">Ejemplo: nombre.apellido@dominio.es</small>
+<label for="usuario">Nombre de usuario *</label><br>
+<input type="text" id="usuario" name="usuario" value="<?= valor('usuario') ?>">
 </p>
-
-<fieldset id="grupo-sexo">
+<p>
+<label for="password">Contraseña *</label><br>
+<input type="password" id="password" name="password">
+</p>
+<p>
+<label for="repetir-password">Repetir contraseña *</label><br>
+<input type="password" id="repetir-password" name="repetir-password">
+</p>
+<p>
+<label for="email">Dirección de email *</label><br>
+<input type="text" id="email" name="email" value="<?= valor('email') ?>">
+</p>
+<fieldset>
 <legend>Sexo *</legend>
-<?= radios('sexo', SEXOS, $v['sexo']) ?>
+<label><input type="radio" name="sexo" value="Hombre"<?= valor('sexo') === 'Hombre' ? ' checked' : '' ?>> Hombre</label>
+<label><input type="radio" name="sexo" value="Mujer"<?= valor('sexo') === 'Mujer' ? ' checked' : '' ?>> Mujer</label>
+<label><input type="radio" name="sexo" value="Otro"<?= valor('sexo') === 'Otro' ? ' checked' : '' ?>> Otro</label>
 </fieldset>
-
 <p>
-<label for="fecha-nacimiento">Fecha de nacimiento *</label><br>
-<input type="text" id="fecha-nacimiento" name="fecha-nacimiento" inputmode="numeric" value="<?= e($v['fecha-nacimiento']) ?>">
-<small class="ayuda" id="ayuda-fecha-nacimiento">Formato dd/mm/aaaa. Debes tener al menos 18 años cumplidos. Ejemplo: 25/03/1990</small>
+<label for="fecha-nacimiento">Fecha de nacimiento * (dd/mm/aaaa)</label><br>
+<input type="text" id="fecha-nacimiento" name="fecha-nacimiento" value="<?= valor('fecha-nacimiento') ?>">
 </p>
-
 <p>
 <label for="ciudad">Ciudad de residencia</label><br>
-<input type="text" id="ciudad" name="ciudad" value="<?= e($v['ciudad']) ?>">
+<input type="text" id="ciudad" name="ciudad" value="<?= valor('ciudad') ?>">
 </p>
-
 <p>
 <label for="pais">País de residencia</label><br>
 <select id="pais" name="pais">
-<?= opciones(PAISES, $v['pais']) ?>
+<?php
+$paises = ['Alemania', 'Argentina', 'Bélgica', 'Colombia', 'España', 'Francia', 'Italia', 'México', 'Portugal', 'Reino Unido'];
+$paisElegido = valor('pais') !== '' ? valor('pais') : 'España';
+foreach ($paises as $pais) {
+    $marcado = ($pais === $paisElegido) ? ' selected' : '';
+    echo "<option$marcado>$pais</option>\n";
+}
+?>
 </select>
 </p>
-
 <p>
 <label for="foto">Foto</label><br>
 <input type="file" id="foto" name="foto" accept="image/*">
 </p>
-
-<p><button type="submit"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Registrarse</button></p>
+<p><button type="submit">Registrarse</button></p>
 </form>
 </main>
-<?php require_once 'includes/pie.php'; ?>
+<?php require 'includes/pie.php'; ?>

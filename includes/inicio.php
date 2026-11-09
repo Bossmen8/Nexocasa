@@ -1,52 +1,30 @@
 <?php
-/*
- * PLANTILLA (2/3) - Inicio del cuerpo: <body>, logotipo, nombre del sitio y barra de navegación.
- *
- * Variables opcionales que puede definir la página:
- *   $zona     'publica' (por defecto) o 'privada'. Cambia los enlaces de la barra de navegación.
- *
- * En la parte privada, si la URL trae ?usuario=..., se saluda al usuario en la cabecera.
- * (Sin sesiones, el nombre solo llega a la página a la que redirige control-acceso.php;
- *  en la práctica 8 se guardará en la sesión y se verá en todas las páginas privadas.)
- */
-$zona = $zona ?? 'publica';
-$paginaActual = basename($_SERVER['PHP_SELF']);
-
-// Enlaces de la barra de navegación: fichero => [icono, texto]
-if ($zona === 'privada') {
-    $enlacesNav = [
-        'index-autenticado.php' => ['fa-house', 'Inicio'],
-        'busqueda.php'          => ['fa-magnifying-glass', 'Buscar'],
-        'menu-usuario.php'      => ['fa-circle-user', 'Mi cuenta'],
-        'index.php'             => ['fa-right-from-bracket', 'Cerrar sesión'],
-    ];
-    $navInicio = 'index-autenticado.php';
-} else {
-    $enlacesNav = [
-        'index.php'    => ['fa-house', 'Inicio'],
-        'busqueda.php' => ['fa-magnifying-glass', 'Buscar'],
-        'registro.php' => ['fa-user-plus', 'Registrarse'],
-    ];
-    $navInicio = 'index.php';
-}
-unset($enlacesNav[$paginaActual]);
-$navUsuario = $zona === 'privada' ? leer($_GET, 'usuario') : '';
+// PLANTILLA 2/3: <body>, logotipo y barra de navegación.
+// Si la página define $zona = 'privada', se muestra el menú de la parte privada.
+$privada = isset($zona) && $zona === 'privada';
 ?>
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido principal</a>
 <header>
 <p>
 <img src="img/Logo Nexocasa.png" alt="">
-<a href="<?= $navInicio ?>">Nexocasa</a>
+<a href="<?= $privada ? 'index-autenticado.php' : 'index.php' ?>">Nexocasa</a>
 </p>
 <nav>
 <ul>
-<?php foreach ($enlacesNav as $navHref => [$navIcono, $navTexto]): ?>
-<li><a href="<?= $navHref ?>"><i class="fa-solid <?= $navIcono ?>" aria-hidden="true"></i><?= $navTexto ?></a></li>
-<?php endforeach; ?>
+<?php if ($privada): ?>
+<li><a href="index-autenticado.php"><i class="fa-solid fa-house" aria-hidden="true"></i>Inicio</a></li>
+<li><a href="busqueda.php"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Buscar</a></li>
+<li><a href="menu-usuario.php"><i class="fa-solid fa-circle-user" aria-hidden="true"></i>Mi cuenta</a></li>
+<li><a href="index.php"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>Cerrar sesión</a></li>
+<?php else: ?>
+<li><a href="index.php"><i class="fa-solid fa-house" aria-hidden="true"></i>Inicio</a></li>
+<li><a href="busqueda.php"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Buscar</a></li>
+<li><a href="registro.php"><i class="fa-solid fa-user-plus" aria-hidden="true"></i>Registrarse</a></li>
+<?php endif; ?>
 </ul>
 </nav>
-<?php if ($navUsuario !== ''): ?>
-<p>Hola, <strong><?= e($navUsuario) ?></strong></p>
+<?php if ($privada && !empty($_GET['usuario'])): ?>
+<p>Hola, <strong><?= e($_GET['usuario']) ?></strong></p>
 <?php endif; ?>
 </header>

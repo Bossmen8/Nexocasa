@@ -1,46 +1,35 @@
 <?php
-/* "Mis anuncios" (parte privada): listado de los anuncios del usuario con foto, título, ciudad, país y precio. */
+// Mis anuncios (parte privada): foto, título, ciudad, país y precio de cada anuncio del usuario
 $titulo = 'Mis anuncios';
 $zona = 'privada';
-require_once 'includes/cabecera.php';
-require_once 'includes/inicio.php';
-require_once 'includes/anuncios.php';
-$anuncios = anunciosDelUsuario();
+require 'includes/cabecera.php';
+require 'includes/inicio.php';
+$anuncios = require 'datos/anuncios.php';
 ?>
 <main id="contenido">
 <h1>Mis anuncios</h1>
-<p><a href="crear-anuncio.php"><i class="fa-solid fa-circle-plus" aria-hidden="true"></i>Crear un anuncio nuevo</a></p>
-<?php if (!$anuncios): ?>
-<p>Todavía no has publicado ningún anuncio.</p>
-<?php else: ?>
 <table>
-<caption>Anuncios publicados (<?= count($anuncios) ?>)</caption>
-<thead>
 <tr>
 <th scope="col">Foto</th>
 <th scope="col">Título</th>
 <th scope="col">Ciudad</th>
 <th scope="col">País</th>
 <th scope="col">Precio</th>
-<th scope="col">Acciones</th>
+<th scope="col">Opciones</th>
 </tr>
-</thead>
-<tbody>
-<?php foreach ($anuncios as $id => $a): ?>
+<?php foreach ($anuncios as $anuncio): ?>
 <tr>
-<td><img src="<?= e($a['foto']) ?>" alt="<?= e($a['altFoto']) ?>" width="100"></td>
-<th scope="row"><a href="ver-anuncio.php?id=<?= $id ?>"><?= e($a['titulo']) ?></a></th>
-<td><?= e($a['ciudad']) ?></td>
-<td><?= e(etiqueta(PAISES, $a['pais'])) ?></td>
-<td><?= formatearPrecio($a['precio']) ?></td>
+<td><img src="<?= e($anuncio['foto']) ?>" alt="<?= e($anuncio['titulo']) ?>" width="100"></td>
+<td><?= e($anuncio['titulo']) ?></td>
+<td><?= e($anuncio['ciudad']) ?></td>
+<td><?= e($anuncio['pais']) ?></td>
+<td><?= e($anuncio['precio']) ?></td>
 <td>
-<a href="ver-anuncio.php?id=<?= $id ?>">Ver</a> ·
-<a href="anadir-foto.php?anuncio=<?= $id ?>">Añadir foto</a>
+<a href="ver-anuncio.php?id=<?= $anuncio['id'] ?>">Ver anuncio</a><br>
+<a href="anadir-foto.php?anuncio=<?= $anuncio['id'] ?>">Añadir foto</a>
 </td>
 </tr>
 <?php endforeach; ?>
-</tbody>
 </table>
-<?php endif; ?>
 </main>
-<?php require_once 'includes/pie.php'; ?>
+<?php require 'includes/pie.php'; ?>
