@@ -4,6 +4,7 @@
  * a anadir-foto.php?anuncio=N para añadirle una foto. Recibe el identificador por la URL: ?id=N
  */
 require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 require_once 'includes/anuncios.php';
 
 $anuncio = obtenerAnuncio(leerId('id'));

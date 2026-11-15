@@ -1,5 +1,7 @@
 <?php
 /* "Mis anuncios" (parte privada): listado de los anuncios del usuario con foto, título, ciudad, país y precio. */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Mis anuncios';
 $zona = 'privada';
 require_once 'includes/cabecera.php';

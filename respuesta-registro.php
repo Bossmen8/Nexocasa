@@ -1,8 +1,9 @@
 <?php
 /*
  * Respuesta al formulario de registro. Recibe los datos por POST desde registro.php.
- * - Si hay errores: redirige a registro.php pasando por la URL los códigos de error y los datos
- *   escritos (sin contraseñas). No se usan sesiones ni cookies.
+ * - Si hay errores: redirige a registro.php. PRÁCTICA 8: los códigos de error y los datos escritos
+ *   (sin contraseñas) ya NO viajan en la URL: se guardan como FLASHDATA en la sesión
+ *   ($_SESSION['flash']['registro']) y registro.php los lee una sola vez.
  * - Si todo es correcto: muestra los datos recibidos (la foto todavía no se sube ni se muestra).
  */
 require_once 'includes/funciones.php';
@@ -16,11 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $errores = validarRegistro($_POST);
 
 if ($errores) {
-    $parametros = ['errores' => $errores];
+    $datosEscritos = [];
     foreach (CAMPOS_REGISTRO as $campo) {
-        $parametros[$campo] = leer($_POST, $campo);
+        $datosEscritos[$campo] = leer($_POST, $campo);
     }
-    redirigir('registro.php', $parametros);
+    guardarFlash('registro', ['errores' => $errores, 'datos' => $datosEscritos]);
+    redirigir('registro.php');
 }
 
 $datos = [

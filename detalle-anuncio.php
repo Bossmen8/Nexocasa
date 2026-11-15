@@ -1,15 +1,22 @@
 <?php
 /*
- * Detalle de un anuncio (parte pública). Recibe el identificador por la URL: detalle-anuncio.php?id=N
- * Si N es par se muestra un anuncio y si es impar el otro (datos/anuncios.php).
+ * Detalle de un anuncio (parte pública RESTRINGIDA). Recibe el identificador por la URL: ?id=N
+ * Práctica 8:
+ *   - Solo lo pueden ver los usuarios autenticados (o recordados): requerirAcceso().
+ *   - Cada visita se guarda en la cookie de "Últimos anuncios visitados": registrarVisita().
+ *     Las dos cosas se hacen ANTES de generar la salida, porque envían cabeceras HTTP.
  */
 require_once 'includes/funciones.php';
+requerirAcceso();
 require_once 'includes/anuncios.php';
+require_once 'includes/ultimos-visitados.php';
 
 $anuncio = obtenerAnuncio(leerId('id'));
 if ($anuncio === null) {
     // Falta el identificador o no es un número positivo
     http_response_code(404);
+} else {
+    registrarVisita($anuncio['id']);
 }
 
 $titulo = $anuncio['titulo'] ?? 'Anuncio no encontrado';

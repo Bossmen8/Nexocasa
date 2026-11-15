@@ -7,6 +7,7 @@
  *   - Coste total = coste de un folleto × número de copias.
  */
 require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 require_once 'includes/listas.php';
 require_once 'includes/anuncios.php';
 require_once 'includes/tarifas.php';

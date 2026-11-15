@@ -3,6 +3,8 @@
  * "Crear anuncio" (parte privada): formulario con los datos necesarios para crear un anuncio.
  * La página de respuesta se hará en una práctica posterior (de momento el formulario va a error-404.php).
  */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Crear anuncio';
 $zona = 'privada';
 require_once 'includes/cabecera.php';

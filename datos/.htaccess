@@ -1,0 +1,2 @@
+# Ningún fichero de datos/ se puede abrir desde el navegador (solo se usan con require desde PHP)
+Require all denied
