@@ -5,12 +5,18 @@
  * Variables opcionales que puede definir la página:
  *   $zona     'publica' (por defecto) o 'privada'. Cambia los enlaces de la barra de navegación.
  *
- * En la parte privada, si la URL trae ?usuario=..., se saluda al usuario en la cabecera.
- * (Sin sesiones, el nombre solo llega a la página a la que redirige control-acceso.php;
- *  en la práctica 8 se guardará en la sesión y se verá en todas las páginas privadas.)
+ * PRÁCTICA 8:
+ *   - El nombre del usuario se lee de la SESIÓN (ya no de la URL) y se saluda según la hora
+ *     ("Buenos días, Pepito"...) en la cabecera de todas las páginas cuando hay sesión.
+ *   - En la parte pública, si hay un usuario autenticado o recordado, "Registrarse" se cambia por
+ *     "Mi cuenta" y "Salir" (se muestra el sitio como si el usuario se hubiese autenticado).
+ *   - Se muestran los mensajes flash de aviso (por ejemplo, "Has cerrado la sesión").
+ *   - Si el usuario acaba de entrar con "Recordarme" directamente en una página privada o restringida,
+ *     se muestra su nombre y la fecha y hora de su última visita.
  */
 $zona = $zona ?? 'publica';
 $paginaActual = basename($_SERVER['PHP_SELF']);
+$navUsuario = usuarioActual();
 
 // Enlaces de la barra de navegación: fichero => [icono, texto]
 if ($zona === 'privada') {
@@ -18,9 +24,17 @@ if ($zona === 'privada') {
         'index-autenticado.php' => ['fa-house', 'Inicio'],
         'busqueda.php'          => ['fa-magnifying-glass', 'Buscar'],
         'menu-usuario.php'      => ['fa-circle-user', 'Mi cuenta'],
-        'index.php'             => ['fa-right-from-bracket', 'Cerrar sesión'],
+        'salir.php'             => ['fa-right-from-bracket', 'Salir'],
     ];
     $navInicio = 'index-autenticado.php';
+} elseif ($navUsuario !== null) {
+    $enlacesNav = [
+        'index.php'        => ['fa-house', 'Inicio'],
+        'busqueda.php'     => ['fa-magnifying-glass', 'Buscar'],
+        'menu-usuario.php' => ['fa-circle-user', 'Mi cuenta'],
+        'salir.php'        => ['fa-right-from-bracket', 'Salir'],
+    ];
+    $navInicio = 'index.php';
 } else {
     $enlacesNav = [
         'index.php'    => ['fa-house', 'Inicio'],
@@ -30,7 +44,10 @@ if ($zona === 'privada') {
     $navInicio = 'index.php';
 }
 unset($enlacesNav[$paginaActual]);
-$navUsuario = $zona === 'privada' ? leer($_GET, 'usuario') : '';
+
+$avisoFlash = leerFlash('aviso');
+$mostrarUltimaVisita = !empty($accesoRecordadoAhora) && !empty($paginaProtegida)
+                       && !empty($_SESSION['ultimaVisita']);
 ?>
 <body>
 <a class="saltar" href="#contenido">Saltar al contenido principal</a>
@@ -46,7 +63,13 @@ $navUsuario = $zona === 'privada' ? leer($_GET, 'usuario') : '';
 <?php endforeach; ?>
 </ul>
 </nav>
-<?php if ($navUsuario !== ''): ?>
-<p>Hola, <strong><?= e($navUsuario) ?></strong></p>
+<?php if ($navUsuario !== null): ?>
+<p><a class="saludo" href="menu-usuario.php"><i class="fa-solid fa-circle-user" aria-hidden="true"></i><?= e(saludo($navUsuario)) ?></a></p>
 <?php endif; ?>
 </header>
+<?php if ($avisoFlash): ?>
+<p class="aviso" role="status"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><?= e($avisoFlash) ?></p>
+<?php endif; ?>
+<?php if ($mostrarUltimaVisita): ?>
+<p class="aviso ultima-visita" role="status"><i class="fa-regular fa-clock" aria-hidden="true"></i>Hola, <strong><?= e($navUsuario) ?></strong>: te estábamos recordando en este equipo. Tu última visita fue <?= e(textoUltimaVisita($_SESSION['ultimaVisita'])) ?>.</p>
+<?php endif; ?>

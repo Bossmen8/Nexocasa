@@ -1,8 +1,9 @@
 <?php
 /*
  * Formulario de registro como nuevo usuario. Envía los datos por POST a respuesta-registro.php.
- * Si hay errores, respuesta-registro.php redirige aquí con los errores y los datos en la URL:
- *   registro.php?errores[0]=usuario-vacio&usuario=...&email=...
+ * Si hay errores, respuesta-registro.php redirige aquí. PRÁCTICA 8: los errores y los datos llegan
+ * como FLASHDATA en la sesión (antes llegaban por la URL). leerFlash() los lee y los borra, así que
+ * si se recarga la página el formulario aparece vacío y sin errores.
  * Entonces se muestra un resumen de errores al principio, un mensaje junto a cada campo erróneo
  * y cada campo se rellena con lo que el usuario había escrito (salvo las contraseñas).
  */
@@ -12,8 +13,10 @@ require_once 'includes/inicio.php';
 require_once 'includes/registro-validacion.php';
 $scriptsValidacion = ['js/validaciones.js', 'js/interfaz.js', 'js/registro.js'];
 
-// Errores recibidos por la URL (solo se aceptan los códigos conocidos)
-$codigos = isset($_GET['errores']) && is_array($_GET['errores']) ? $_GET['errores'] : [];
+// Errores y datos recibidos como flashdata (solo se aceptan los códigos conocidos)
+$flash = leerFlash('registro', []);
+$codigos = is_array($flash['errores'] ?? null) ? $flash['errores'] : [];
+$anteriores = is_array($flash['datos'] ?? null) ? $flash['datos'] : [];
 $errores = [];      // campo => mensaje
 $resumen = [];      // lista de mensajes
 foreach ($codigos as $codigo) {
@@ -26,7 +29,7 @@ foreach ($codigos as $codigo) {
 // Valores previos de los campos (vacíos la primera vez)
 $v = [];
 foreach (CAMPOS_REGISTRO as $campo) {
-    $v[$campo] = leer($_GET, $campo);
+    $v[$campo] = leer($anteriores, $campo);
 }
 if ($v['pais'] === '') {
     $v['pais'] = 'espana';

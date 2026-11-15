@@ -1,5 +1,7 @@
 <?php
 /* Mis mensajes (parte privada). De momento muestra mensajes de ejemplo. */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Mis mensajes';
 $zona = 'privada';
 require_once 'includes/cabecera.php';

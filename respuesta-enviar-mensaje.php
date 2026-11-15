@@ -4,6 +4,7 @@
  * Comprueba que el tipo de mensaje es uno de los permitidos y que el texto no está vacío.
  */
 require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 require_once 'includes/listas.php';
 
 // Si se abre la página directamente (sin enviar el formulario), se vuelve al formulario

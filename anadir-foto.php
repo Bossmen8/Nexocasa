@@ -8,6 +8,8 @@
  *     no se envía, el valor viaja en un campo oculto.
  * La subida de la foto y la página de respuesta se harán en una práctica posterior.
  */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Añadir foto a anuncio';
 $zona = 'privada';
 require_once 'includes/cabecera.php';

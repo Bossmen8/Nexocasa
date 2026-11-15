@@ -1,5 +1,7 @@
 <?php
 /* Formulario para enviar un mensaje al anunciante. Envía los datos por POST a respuesta-enviar-mensaje.php. */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Enviar mensaje';
 require_once 'includes/cabecera.php';
 require_once 'includes/inicio.php';

@@ -5,6 +5,8 @@
  * JavaScript, para comprobar que ambas dan los mismos importes.
  * El formulario envía los datos por POST a respuesta-solicitar-folleto.php.
  */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Solicitar folleto publicitario';
 $zona = 'privada';
 require_once 'includes/cabecera.php';

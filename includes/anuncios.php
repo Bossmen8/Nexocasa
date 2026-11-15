@@ -6,26 +6,32 @@
  *   mis-anuncios.php, anadir-foto.php, solicitar-folleto.php   → anunciosDelUsuario()
  */
 
+/** Todos los anuncios de ejemplo (datos/anuncios.php), indexados por su identificador. */
+function todosLosAnuncios(): array
+{
+    static $anuncios = null;
+    return $anuncios ??= require __DIR__ . '/../datos/anuncios.php';
+}
+
 /**
- * Devuelve el anuncio que corresponde a un identificador: el anuncio "par" si el número es par
- * y el anuncio "impar" si es impar. Devuelve null si el identificador no es válido.
+ * Devuelve el anuncio que corresponde a un identificador. Si no existe un anuncio con ese
+ * identificador, se mantiene la regla de la práctica 7: el anuncio 2 si el número es par y el 1
+ * si es impar. Devuelve null si el identificador no es válido.
  */
 function obtenerAnuncio(?int $id): ?array
 {
     if ($id === null) {
         return null;
     }
-    $anuncios = require __DIR__ . '/../datos/anuncios.php';
-    return $id % 2 === 0 ? $anuncios['par'] : $anuncios['impar'];
+    $anuncios = todosLosAnuncios();
+    return $anuncios[$id] ?? ($id % 2 === 0 ? $anuncios[2] : $anuncios[1]);
 }
 
-/** Anuncios del usuario (de momento, los dos anuncios de ejemplo), indexados por su id. */
+/** Anuncios del usuario que ha iniciado sesión, indexados por su id. */
 function anunciosDelUsuario(): array
 {
-    $lista = [];
-    foreach (require __DIR__ . '/../datos/anuncios.php' as $anuncio) {
-        $lista[$anuncio['id']] = $anuncio;
-    }
+    $usuario = usuarioActual();
+    $lista = array_filter(todosLosAnuncios(), fn($a) => $a['usuario'] === $usuario);
     ksort($lista);
     return $lista;
 }

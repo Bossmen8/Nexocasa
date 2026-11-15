@@ -1,5 +1,7 @@
 <?php
 /* Página principal de la parte privada: igual que la pública pero sin el formulario de acceso. */
+require_once 'includes/funciones.php';
+requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
 $titulo = 'Inicio';
 $zona = 'privada';
 require_once 'includes/cabecera.php';
