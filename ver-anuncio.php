@@ -4,7 +4,10 @@
  * a anadir-foto.php?anuncio=N para añadirle una foto. Recibe el identificador por la URL: ?id=N
  */
 require_once 'includes/funciones.php';
+<<<<<<< HEAD
 requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
+=======
+>>>>>>> main
 require_once 'includes/anuncios.php';
 
 $anuncio = obtenerAnuncio(leerId('id'));
@@ -18,6 +21,7 @@ require_once 'includes/cabecera.php';
 require_once 'includes/inicio.php';
 ?>
 <main id="contenido" class="columnas">
+<<<<<<< HEAD
 <?php if ($anuncio): ?>
 <?php fichaAnuncio($anuncio, true); ?>
 <?php else: ?>
@@ -27,3 +31,14 @@ require_once 'includes/inicio.php';
 <?php endif; ?>
 </main>
 <?php require_once 'includes/pie.php'; ?>
+=======
+    <?php if ($anuncio): ?>
+        <?php fichaAnuncio($anuncio, true); ?>
+    <?php else: ?>
+        <h1>Anuncio no encontrado</h1>
+        <p>El anuncio que buscas no existe o el enlace no es correcto.</p>
+        <p><a href="mis-anuncios.php">Volver a mis anuncios</a></p>
+    <?php endif; ?>
+</main>
+<?php require_once 'includes/pie.php'; ?>
+>>>>>>> main

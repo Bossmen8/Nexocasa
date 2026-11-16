@@ -149,7 +149,10 @@ function mostrarErrores(array $errores, string $titulo = 'Hay errores en el form
     }
     echo "</ul>\n</div>\n";
 }
+<<<<<<< HEAD
 
 // ---------- Sesión (práctica 8) ----------
 // Se carga al final porque usa redirigir(). Inicia la sesión en todas las páginas.
 require_once __DIR__ . '/sesion.php';
+=======
+>>>>>>> main

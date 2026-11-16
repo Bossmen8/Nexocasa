@@ -7,7 +7,10 @@
  *   - Coste total = coste de un folleto × número de copias.
  */
 require_once 'includes/funciones.php';
+<<<<<<< HEAD
 requerirAcceso();   // práctica 8: página protegida, sin sesión redirige a index.php
+=======
+>>>>>>> main
 require_once 'includes/listas.php';
 require_once 'includes/anuncios.php';
 require_once 'includes/tarifas.php';
@@ -53,6 +56,7 @@ $direccion = implode(', ', array_filter([
 ], fn($parte) => $parte !== ''));
 
 $datos = [
+<<<<<<< HEAD
     'Texto adicional'         => $p('texto-adicional'),
     'Nombre'                  => $p('nombre'),
     'Correo electrónico'      => $p('email'),
@@ -64,6 +68,19 @@ $datos = [
     'Fecha de recepción'      => $p('fecha-recepcion') !== '' ? formatearFecha($p('fecha-recepcion')) : '',
     'Impresión a color'       => $modo !== '' ? etiqueta(MODOS_IMPRESION, $modo) : 'No indicado (se aplica blanco y negro)',
     'Impresión del precio'    => etiqueta(SI_NO, $p('impresion-precio')),
+=======
+    'Texto adicional' => $p('texto-adicional'),
+    'Nombre' => $p('nombre'),
+    'Correo electrónico' => $p('email'),
+    'Dirección' => $direccion,
+    'Teléfono' => $p('telefono'),
+    'Número de copias' => $copias,
+    'Resolución de impresión' => "$dpi dpi",
+    'Anuncio' => $anuncio ? "{$anuncio['titulo']} ({$anuncio['ciudad']})" : '',
+    'Fecha de recepción' => $p('fecha-recepcion') !== '' ? formatearFecha($p('fecha-recepcion')) : '',
+    'Impresión a color' => $modo !== '' ? etiqueta(MODOS_IMPRESION, $modo) : 'No indicado (se aplica blanco y negro)',
+    'Impresión del precio' => etiqueta(SI_NO, $p('impresion-precio')),
+>>>>>>> main
 ];
 
 $titulo = 'Solicitud de folleto registrada';
@@ -72,6 +89,7 @@ require_once 'includes/cabecera.php';
 require_once 'includes/inicio.php';
 ?>
 <main id="contenido">
+<<<<<<< HEAD
 <h1>Solicitud de folleto publicitario registrada</h1>
 <p>Hemos recibido tu solicitud con los siguientes datos:</p>
 <dl class="conBorde">
@@ -97,3 +115,49 @@ require_once 'includes/inicio.php';
 </section>
 </main>
 <?php require_once 'includes/pie.php'; ?>
+=======
+    <h1>Solicitud de folleto publicitario registrada</h1>
+    <p>Hemos recibido tu solicitud con los siguientes datos:</p>
+    <dl class="conBorde">
+        <?php foreach ($datos as $nombre => $valor): ?>
+            <dt><?= e($nombre) ?></dt>
+            <dd><?= $valor === '' ? '(no indicado)' : nl2br(e($valor)) ?></dd>
+        <?php endforeach; ?>
+        <dt>Color de la portada</dt>
+        <dd><input type="color" value="<?= e($colorPortada) ?>" disabled aria-label="Color de la portada">
+            (<?= e($colorPortada) ?>)</dd>
+    </dl>
+
+    <section class="conBorde">
+        <h2>Coste del folleto</h2>
+        <table>
+            <caption>Desglose del coste</caption>
+            <tr>
+                <th scope="row">Número de páginas (valor de ejemplo)</th>
+                <td><?= PAGINAS_FICTICIAS ?></td>
+            </tr>
+            <tr>
+                <th scope="row">Número de fotos (valor de ejemplo)</th>
+                <td><?= FOTOS_FICTICIAS ?></td>
+            </tr>
+            <tr>
+                <th scope="row">Impresión</th>
+                <td><?= $esColor ? 'Color' : 'Blanco y negro' ?>, <?= $dpi ?> dpi</td>
+            </tr>
+            <tr>
+                <th scope="row">Coste de un folleto</th>
+                <td><?= centimosAEuros($costeUnitario) ?></td>
+            </tr>
+            <tr>
+                <th scope="row">Número de copias</th>
+                <td>× <?= $copias ?></td>
+            </tr>
+            <tr>
+                <th scope="row">Coste total</th>
+                <td><strong><?= centimosAEuros($costeTotal) ?></strong></td>
+            </tr>
+        </table>
+    </section>
+</main>
+<?php require_once 'includes/pie.php'; ?>
+>>>>>>> main

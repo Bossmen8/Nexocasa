@@ -1,5 +1,6 @@
 <?php
 /*
+<<<<<<< HEAD
  * PLANTILLA (3/3) - Pie de página y cierre del documento: <footer>, scripts, </body></html>.
  *
  * Variables opcionales que puede definir la página:
@@ -10,14 +11,21 @@
  * "Últimos anuncios visitados", para cualquier usuario.
  */
 require_once __DIR__ . '/ultimos-visitados.php';
+=======
+ * PLANTILLA 3 - Pie de página y cierre del documento: <footer>, scripts, </body></html>.
+ */
+>>>>>>> main
 $scripts = $scripts ?? [];
 if (VALIDACION_CLIENTE && !empty($scriptsValidacion)) {
     $scripts = array_merge($scripts, $scriptsValidacion);
 }
 ?>
+<<<<<<< HEAD
 <?php if (($zona ?? 'publica') !== 'privada') {
     panelUltimosVisitados();
 } ?>
+=======
+>>>>>>> main
 <footer>
 <p>&copy; 2026 Nexocasa · <a href="accesibilidad.php">Accesibilidad</a></p>
 </footer>

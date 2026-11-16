@@ -1,5 +1,6 @@
 <?php
 /*
+<<<<<<< HEAD
  * Datos de los anuncios de ejemplo que se muestran en "Detalle anuncio" y "Ver anuncio",
  * indexados por su identificador. Este fichero SOLO guarda estos datos (en una práctica posterior
  * se leerán de una base de datos).
@@ -12,6 +13,18 @@
  */
 return [
     1 => [
+=======
+ * Datos de los DOS anuncios de ejemplo que se muestran en "Detalle anuncio" y "Ver anuncio".
+ * Este fichero SOLO guarda estos datos. En una práctica posterior se leerán de una base de datos.
+ *
+ *   'par'   → se muestra cuando el identificador recibido es un número par.
+ *   'impar' → se muestra cuando el identificador recibido es un número impar.
+ *
+ * También se usan como anuncios del usuario en "Mis anuncios" (con el identificador 'id').
+ */
+return [
+    'impar' => [
+>>>>>>> main
         'id'           => 1,
         'tipoAnuncio'  => 'venta',
         'tipoVivienda' => 'vivienda',
@@ -39,7 +52,11 @@ return [
         ],
         'usuario' => 'paquito123',
     ],
+<<<<<<< HEAD
     2 => [
+=======
+    'par' => [
+>>>>>>> main
         'id'           => 2,
         'tipoAnuncio'  => 'alquiler',
         'tipoVivienda' => 'vivienda',
@@ -66,6 +83,7 @@ return [
         ],
         'usuario' => 'mlopez23',
     ],
+<<<<<<< HEAD
     3 => [
         'id'           => 3,
         'tipoAnuncio'  => 'venta',
@@ -143,4 +161,6 @@ return [
         ],
         'usuario' => 'mlopez23',
     ],
+=======
+>>>>>>> main
 ];
